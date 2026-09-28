@@ -1,41 +1,37 @@
-PHILO_PATH = ./srcs/mandatory
-BONUS_PATH = ./srcs/bonus
+LIBFT_PATH 	= ./libft
+LIBFT      	= $(LIBFT_PATH)/libft.a
 
-SRCS = ${addprefix ${PHILO_PATH}/, main.c \
-									philo_utils.c \
-									philo_utils2.c \
-									routine_utils.c}
-# SRCS_B = ${addprefix ${BONUS_PATH}/,}
+PHILO_PATH  = ./srcs/mandatory
 
-OBJS = ${SRCS:.c=.o}
-# OBJS_B = ${SRCS_B:.c=.o}
+SRCS 	= ${addprefix ${PHILO_PATH}/, main.c parsing.c init.c philo_utils.c routine_philo.c routine_philo_utils.c routine_checker.c time.c}
+OBJS 	= ${SRCS:.c=.o}
 
-NAME = philo
-BONUS = philo_bonus
-CC = cc
-CFLAGS = -Wall -Wextra -Werror -g3
-RM = rm -rf
+
+NAME 	= philo
+CC 		= cc
+CFLAGS	= -Wall -Wextra -Werror -g #-fsanitize=thread
+RM 		= rm -rf
 INCLUDES = -Iincludes
 
 all : ${NAME}
 
-# bonus : ${BONUS}
-
 ${NAME} : ${LIBFT} ${OBJS}
-	${CC} ${CFLAGS} -o ${NAME} ${OBJS}
+	${CC} ${CFLAGS} -o ${NAME} ${OBJS} ${LIBFT}
 
-# ${BONUS} : ${LIBFT} ${OBJS_B}
-# 	${CC} ${CFLAGS} -o ${BONUS} ${OBJS_B}
+$(LIBFT):
+	${MAKE} -C $(LIBFT_PATH) all
 
 %.o: %.c
 	$(CC) $(CFLAGS) -c -o $@ $< $(INCLUDES)
 	
 clean:
-	@${RM} ${OBJS} ${OBJS_B}
+	@${MAKE} clean --silent -C ${LIBFT_PATH}
+	@${RM} ${OBJS}
 	@printf "MAKEFILE CLEAN\n"
 
 fclean: clean
-	@${RM} ${NAME} ${BONUS}
+	@${MAKE} fclean --silent -C ${LIBFT_PATH}
+	@${RM} ${NAME}
 	@printf "MAKEFILE FCLEAN\n"
 
 re: fclean all

@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_strdup.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbislimi <dbislimi@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:50:04 by dbislimi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:03:18 by dbislimi         ###   ########.fr       */
+/*   Created: 2024/04/22 11:14:01 by dbislimi          #+#    #+#             */
+/*   Updated: 2024/07/22 14:52:04 by dbislimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "libft.h"
 
-void	ft_free_philo(t_table *table, char *msg)
+char	*ft_strdup(const char *s)
 {
-	if (table->philos)
-		free(table->philos);
-	destroy_mutexes(table);
-	if (msg)
-		printf("%s%s%s\n", R, msg, RST);
+	char	*dup;
+	size_t	i;
+
+	i = 0;
+	if (!s)
+		return (NULL);
+	dup = (char *)malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!dup)
+		return (NULL);
+	while (s[i])
+	{
+		dup[i] = s[i];
+		i++;
+	}
+	dup[i] = 0;
+	return (dup);
 }

@@ -1,22 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_atoi.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbislimi <dbislimi@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:50:04 by dbislimi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:03:18 by dbislimi         ###   ########.fr       */
+/*   Created: 2024/04/22 10:18:33 by dbislimi          #+#    #+#             */
+/*   Updated: 2024/05/07 14:24:05 by dbislimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "libft.h"
 
-void	ft_free_philo(t_table *table, char *msg)
+int	ft_atoi(const char *nptr)
 {
-	if (table->philos)
-		free(table->philos);
-	destroy_mutexes(table);
-	if (msg)
-		printf("%s%s%s\n", R, msg, RST);
+	int	i;
+	int	res;
+	int	sign;
+
+	res = 0;
+	sign = 1;
+	i = 0;
+	while ((nptr[i] >= 9 && nptr[i] <= 13) || nptr[i] == ' ')
+		i++;
+	if (nptr[i] == '-' || nptr[i] == '+')
+	{
+		if (nptr[i] == '-')
+			sign *= -1;
+		i++;
+	}
+	while (nptr[i] >= '0' && nptr[i] <= '9')
+	{
+		res = res * 10 + (nptr[i] - '0');
+		i++;
+	}
+	return (res * sign);
 }

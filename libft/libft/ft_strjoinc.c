@@ -1,22 +1,27 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_strjoinc.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: dbislimi <dbislimi@student.42nice.fr>      +#+  +:+       +#+        */
+/*   By: thmouty <thmouty@student.42.fr>            +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:50:04 by dbislimi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:03:18 by dbislimi         ###   ########.fr       */
+/*   Created: 2024/04/26 17:25:25 by thmouty           #+#    #+#             */
+/*   Updated: 2024/05/13 03:36:12 by thmouty          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "libft.h"
 
-void	ft_free_philo(t_table *table, char *msg)
+char	*ft_strjoinc(char c)
 {
-	if (table->philos)
-		free(table->philos);
-	destroy_mutexes(table);
-	if (msg)
-		printf("%s%s%s\n", R, msg, RST);
+	char	*str;
+
+	if (!c)
+		return (ft_strdup("(null)"));
+	str = (char *)malloc(2 * sizeof(char));
+	if (!str)
+		return (NULL);
+	str[0] = c;
+	str[1] = '\0';
+	return (str);
 }

@@ -1,22 +1,26 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_lstsize.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbislimi <dbislimi@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:50:04 by dbislimi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:03:18 by dbislimi         ###   ########.fr       */
+/*   Created: 2024/04/22 11:12:59 by dbislimi          #+#    #+#             */
+/*   Updated: 2024/05/07 14:31:16 by dbislimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "libft.h"
 
-void	ft_free_philo(t_table *table, char *msg)
+int	ft_lstsize(t_list *lst)
 {
-	if (table->philos)
-		free(table->philos);
-	destroy_mutexes(table);
-	if (msg)
-		printf("%s%s%s\n", R, msg, RST);
+	int	res;
+
+	res = 0;
+	while (lst != NULL)
+	{
+		lst = lst->next;
+		res++;
+	}
+	return (res);
 }

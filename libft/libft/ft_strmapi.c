@@ -1,22 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_strmapi.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbislimi <dbislimi@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:50:04 by dbislimi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:03:18 by dbislimi         ###   ########.fr       */
+/*   Created: 2024/04/22 11:14:33 by dbislimi          #+#    #+#             */
+/*   Updated: 2024/05/07 14:32:20 by dbislimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "libft.h"
 
-void	ft_free_philo(t_table *table, char *msg)
+char	*ft_strmapi(char const *s, char (*f)(unsigned int, char))
 {
-	if (table->philos)
-		free(table->philos);
-	destroy_mutexes(table);
-	if (msg)
-		printf("%s%s%s\n", R, msg, RST);
+	int		i;
+	char	*fresh;
+
+	if (!s)
+		return (NULL);
+	fresh = malloc(sizeof(char) * (ft_strlen(s) + 1));
+	if (!fresh)
+		return (NULL);
+	i = 0;
+	while (s[i])
+	{
+		fresh[i] = f(i, s[i]);
+		i++;
+	}
+	fresh[i] = 0;
+	return (fresh);
 }

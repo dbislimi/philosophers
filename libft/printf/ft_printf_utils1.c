@@ -1,22 +1,50 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   philo_utils.c                                      :+:      :+:    :+:   */
+/*   ft_printf_utils1.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: dbislimi <dbislimi@student.42nice.fr>      +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2024/09/18 17:50:04 by dbislimi          #+#    #+#             */
-/*   Updated: 2024/10/01 16:03:18 by dbislimi         ###   ########.fr       */
+/*   Created: 2024/04/23 09:29:59 by dbislimi          #+#    #+#             */
+/*   Updated: 2024/07/08 20:30:08 by dbislimi         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../../includes/philo.h"
+#include "ft_printf.h"
 
-void	ft_free_philo(t_table *table, char *msg)
+int	ft_nbrlen(int nb)
 {
-	if (table->philos)
-		free(table->philos);
-	destroy_mutexes(table);
-	if (msg)
-		printf("%s%s%s\n", R, msg, RST);
+	int	res;
+
+	res = 0;
+	if (nb == -2147483648)
+		return (11);
+	else if (nb <= 0)
+	{
+		nb = -nb;
+		res++;
+	}
+	while (nb > 0)
+	{
+		nb = nb / 10;
+		res++;
+	}
+	return (res);
+}
+
+int	ft_putchar(char c)
+{
+	write(1, &c, 1);
+	return (1);
+}
+
+int	ft_putstr(char *s)
+{
+	int	i;
+
+	if (!s)
+		return (ft_putstr("(null)"));
+	i = ft_strlen(s);
+	write(1, s, i);
+	return (i - 1);
 }
